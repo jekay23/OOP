@@ -63,7 +63,7 @@ template <typename T> ostream& operator<< (ostream& s, const Container<T>& conta
     return s;
 }
 
-int main() {
+void testContainer() {
     Container<int> container;
     container.push_back(2);
     container.push_back(3);
@@ -74,5 +74,9 @@ int main() {
     container.pop_back();
     cout << container.size() << ' ' << (container.empty() ? "empty" : "filled") << ' ' << container << endl;
     container.clear();
+}
+
+int main() {
+    testContainer();
     return 0;
 }
