@@ -10,17 +10,14 @@ public:
             m_capacity *= 2;
             T* newHead = new T[m_capacity];
             T* newCurrent = newHead;
-            for (T* oldCurrent = m_data; oldCurrent != m_memoryBack; oldCurrent++) {
-                *newCurrent = *oldCurrent;
+            for (int i = 0; i < m_size; i++) {
+                *newCurrent = m_data[i];
                 newCurrent++;
             }
             delete[] m_data;
             m_data = newHead;
-            m_dataBack = newCurrent;
-            m_memoryBack = m_data + m_capacity;
         }
         m_data[m_size - 1] = pushed;
-        m_dataBack++;
     }
 
     void pop_back() {
@@ -36,18 +33,16 @@ public:
     }
 
     bool empty() const {
-        return (bool) m_size;
+        return m_size;
     }
 
     void clear() {
         delete[] m_data;
         m_size = 0;
-        m_dataBack = m_data;
     }
 
     Container(): m_size(0), m_capacity(4) {
-        m_data = m_dataBack = new T[4];
-        m_memoryBack = m_data + 4;
+        m_data = new T[4];
     }
     
     ~Container() {
@@ -59,8 +54,6 @@ private:
     size_t m_size;
     size_t m_capacity;
     T* m_data;
-    T* m_dataBack;          //pointer set after the last unit with user data
-    T* m_memoryBack;        //pointer set after the last allocated memory unit
 };
 
 template <typename T> ostream& operator<< (ostream& s, const Container<T>& container) {
@@ -77,6 +70,7 @@ int main() {
     container.push_back(4);
     container.push_back(5);
     container.push_back(6);
+    cout << container << endl;
     container.pop_back();
     cout << container.size() << ' ' << (container.empty() ? "empty" : "filled") << ' ' << container << endl;
     container.clear();
