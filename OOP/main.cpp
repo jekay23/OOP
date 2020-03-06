@@ -37,7 +37,6 @@ public:
     }
 
     void clear() {
-        delete[] m_data;
         m_size = 0;
     }
 
@@ -46,9 +45,7 @@ public:
     }
     
     ~Container() {
-        if (m_size) {
-            delete[] m_data;
-        }
+        delete[] m_data;
     }
 private:
     size_t m_size;
@@ -74,6 +71,8 @@ void testContainer() {
     container.pop_back();
     cout << container.size() << ' ' << (container.empty() ? "empty" : "filled") << ' ' << container << endl;
     container.clear();
+    container.push_back(7);
+    cout << container << endl;
 }
 
 int main() {
