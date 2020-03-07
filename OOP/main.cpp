@@ -74,6 +74,7 @@ void testContainer() {
     container.clear();
     container.push_back(7);
     container.push_back(8);
+    container.push_back(9);
     cout << container << endl;
     cout << container.size() << " is the size" << endl;
 }
