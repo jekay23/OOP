@@ -2,29 +2,29 @@
 
 using namespace std;
 
-template <typename T> class Container {
+template < typename T > class Container {
 public:
-    void push_back(T pushed) {
+    void push_back( T pushed ) {
         m_size++;
-        if (m_size > m_capacity) {
+        if ( m_size > m_capacity ) {
             m_capacity *= 2;
-            T* newHead = new T[m_capacity];
-            T* newCurrent = newHead;
-            for (int i = 0; i < m_size; i++) {
-                *newCurrent = m_data[i];
+            T * newHead = new T[ m_capacity ];
+            T * newCurrent = newHead;
+            for ( size_t i = 0; i < m_size; i++ ) {
+                *newCurrent = m_data[ i ];
                 newCurrent++;
             }
             delete[] m_data;
             m_data = newHead;
         }
-        m_data[m_size - 1] = pushed;
+        m_data[ m_size - 1 ] = pushed;
     }
 
     void pop_back() {
         m_size--;
     }
 
-    T operator[] (size_t index) const {
+    T operator [] ( size_t index ) const {
         return m_data[index];
     }
 
@@ -33,15 +33,15 @@ public:
     }
 
     bool empty() const {
-        return m_size;
+        return !m_size;
     }
 
     void clear() {
         m_size = 0;
     }
 
-    Container(): m_size(0), m_capacity(4) {
-        m_data = new T[4];
+    Container(): m_size( 0 ), m_capacity( 4 ) {
+        m_data = new T[ 4 ];
     }
     
     ~Container() {
@@ -50,33 +50,35 @@ public:
 private:
     size_t m_size;
     size_t m_capacity;
-    T* m_data;
+    T * m_data;
 };
 
-template <typename T> ostream& operator<< (ostream& s, const Container<T>& container) {
-    for (int i = 0; i < container.size(); i++) {
-        s << container[i] << ' ';
+template < typename T > ostream & operator << ( ostream & s, const Container< T > & container ) {
+    for ( size_t i = 0; i < container.size(); i++ ) {
+        s << container[ i ] << ' ';
     }
     return s;
 }
 
 void testContainer() {
+    
     Container<int> container;
-    container.push_back(2);
-    container.push_back(3);
-    container.push_back(4);
-    cout << container.size() << " is the size" << endl;
-    container.push_back(5);
-    container.push_back(6);
-    cout << container << endl;
+    container.push_back( 2 );
+    container.push_back( 3 );
+    container.push_back( 4 );
+    cout << container << "- " << container.size() << " is the size" << endl;
+    container.push_back( 5 );
+    container.push_back( 6 );
+    cout << container << "- " << container.size() << " is the size" << endl;
     container.pop_back();
-    cout << container.size() << ' ' << (container.empty() ? "empty" : "filled") << ' ' << container << endl;
+    cout << container << "- " << container.size() << " is the size" << endl;
+    cout << ( container.empty() ? "empty" : "filled" ) << endl;
     container.clear();
-    container.push_back(7);
-    container.push_back(8);
-    container.push_back(9);
-    cout << container << endl;
-    cout << container.size() << " is the size" << endl;
+    cout << container << "- " << container.size() << " is the size" << endl;
+    container.push_back( 7 );
+    container.push_back( 8 );
+    container.push_back( 9 );
+    cout << container << "- " << container.size() << " is the size" << endl;
 }
 
 int main() {
