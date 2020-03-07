@@ -65,6 +65,7 @@ void testContainer() {
     container.push_back(2);
     container.push_back(3);
     container.push_back(4);
+    cout << container.size() << " is the size" << endl;
     container.push_back(5);
     container.push_back(6);
     cout << container << endl;
@@ -72,7 +73,9 @@ void testContainer() {
     cout << container.size() << ' ' << (container.empty() ? "empty" : "filled") << ' ' << container << endl;
     container.clear();
     container.push_back(7);
+    container.push_back(8);
     cout << container << endl;
+    cout << container.size() << " is the size" << endl;
 }
 
 int main() {
